@@ -18,10 +18,6 @@ export const CreateAffiliateDialog = ({ open, onOpenChange, onSuccess }: CreateA
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
-    phone: "",
-    email: "",
-    website: "",
-    company: "",
   });
 
   const generateSlug = (firstName: string, lastName: string) => {
@@ -80,10 +76,6 @@ export const CreateAffiliateDialog = ({ open, onOpenChange, onSuccess }: CreateA
       setFormData({
         first_name: "",
         last_name: "",
-        phone: "",
-        email: "",
-        website: "",
-        company: "",
       });
       
       onOpenChange(false);
@@ -102,7 +94,7 @@ export const CreateAffiliateDialog = ({ open, onOpenChange, onSuccess }: CreateA
         <DialogHeader>
           <DialogTitle className="text-2xl">Create Affiliate</DialogTitle>
           <DialogDescription>
-            Enter minimal details. The system generates code, slug, and landing page from the master template.
+            Just enter the affiliate's name. The system will generate their unique code and landing page automatically.
           </DialogDescription>
         </DialogHeader>
         
@@ -129,54 +121,6 @@ export const CreateAffiliateDialog = ({ open, onOpenChange, onSuccess }: CreateA
                 className="bg-background/50"
               />
             </div>
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="phone">Cell Phone *</Label>
-            <Input
-              id="phone"
-              type="tel"
-              required
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="bg-background/50"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="email">Email *</Label>
-            <Input
-              id="email"
-              type="email"
-              required
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="bg-background/50"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="website">Website or Social Profile *</Label>
-            <Input
-              id="website"
-              type="url"
-              required
-              placeholder="https://..."
-              value={formData.website}
-              onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-              className="bg-background/50"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="company">Company Name *</Label>
-            <Input
-              id="company"
-              required
-              value={formData.company}
-              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-              className="bg-background/50"
-            />
           </div>
           
           <div className="flex gap-3 pt-4">

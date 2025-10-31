@@ -9,8 +9,8 @@ interface Affiliate {
   id: string;
   first_name: string;
   last_name: string;
-  email: string;
-  company: string;
+  email?: string;
+  company?: string;
   code: string;
   slug: string;
   status: string;
@@ -59,8 +59,6 @@ export const AffiliatesTable = ({ affiliates, onUpdate }: AffiliatesTableProps) 
         <TableHeader>
           <TableRow className="border-border hover:bg-transparent">
             <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Company</TableHead>
             <TableHead>Code</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-right">Actions</TableHead>
@@ -72,8 +70,6 @@ export const AffiliatesTable = ({ affiliates, onUpdate }: AffiliatesTableProps) 
               <TableCell className="font-medium">
                 {affiliate.first_name} {affiliate.last_name}
               </TableCell>
-              <TableCell className="text-muted-foreground">{affiliate.email}</TableCell>
-              <TableCell>{affiliate.company}</TableCell>
               <TableCell>
                 <code className="px-2 py-1 rounded bg-muted text-sm font-mono">
                   {affiliate.code}

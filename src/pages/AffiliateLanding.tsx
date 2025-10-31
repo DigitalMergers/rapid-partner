@@ -125,7 +125,7 @@ export default function AffiliateLanding() {
           />
           <div className="relative z-10 text-center max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-              <span className="text-sm font-medium text-primary">{affiliate.company}</span>
+              <span className="text-sm font-medium text-primary">Verified Partner</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
               Grow Faster With A Verified Partner
