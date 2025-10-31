@@ -5,8 +5,10 @@ import { CreateAffiliateDialog } from "@/components/CreateAffiliateDialog";
 import { AffiliatesTable } from "@/components/AffiliatesTable";
 import { Users, MousePointerClick, UserCheck, DollarSign } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 export default function Admin() {
+  const navigate = useNavigate();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [affiliates, setAffiliates] = useState<any[]>([]);
   const [stats, setStats] = useState({
@@ -102,16 +104,44 @@ export default function Admin() {
             value={stats.clicks7d}
             icon={MousePointerClick}
           />
-          <KPICard
-            label="Leads (7d)"
-            value={stats.leads7d}
-            icon={UserCheck}
-          />
+          <div 
+            onClick={() => navigate("/leads")}
+            className="cursor-pointer hover:scale-[1.02] transition-transform"
+          >
+            <KPICard
+              label="Leads (7d)"
+              value={stats.leads7d}
+              icon={UserCheck}
+            />
+          </div>
           <KPICard
             label="Revenue (30d)"
             value={`$${stats.revenue30d.toFixed(2)}`}
             icon={DollarSign}
           />
+        </div>
+
+        {/* Quick Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <button
+            onClick={() => navigate("/leads")}
+            className="glass-panel border border-border rounded-2xl p-6 text-left hover-lift hover:border-primary/50 transition-all"
+          >
+            <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
+              <UserCheck className="w-5 h-5 text-primary" />
+              View All Leads
+            </h3>
+            <p className="text-muted-foreground">
+              See detailed information about all leads submitted from affiliate pages
+            </p>
+          </button>
+          
+          <div className="glass-panel border border-border rounded-2xl p-6">
+            <h3 className="text-xl font-bold mb-2">Performance Analytics</h3>
+            <p className="text-muted-foreground">
+              Track conversion rates and affiliate performance metrics
+            </p>
+          </div>
         </div>
 
         {/* Affiliates Table */}
