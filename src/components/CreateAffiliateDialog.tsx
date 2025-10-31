@@ -68,7 +68,7 @@ export const CreateAffiliateDialog = ({ open, onOpenChange, onSuccess }: CreateA
       if (pageError) throw pageError;
 
       // Copy link to clipboard
-      const link = `${window.location.origin}/a/${code}`;
+      const link = `${window.location.origin}/${slug}`;
       await navigator.clipboard.writeText(link);
 
       toast.success("Affiliate created! Link copied to clipboard.");

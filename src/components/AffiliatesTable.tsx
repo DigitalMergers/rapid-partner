@@ -22,8 +22,8 @@ interface AffiliatesTableProps {
 }
 
 export const AffiliatesTable = ({ affiliates, onUpdate }: AffiliatesTableProps) => {
-  const copyLink = async (code: string) => {
-    const link = `${window.location.origin}/a/${code}`;
+  const copyLink = async (slug: string) => {
+    const link = `${window.location.origin}/${slug}`;
     await navigator.clipboard.writeText(link);
     toast.success("Link copied to clipboard");
   };
@@ -85,14 +85,14 @@ export const AffiliatesTable = ({ affiliates, onUpdate }: AffiliatesTableProps) 
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => window.open(`/a/${affiliate.code}`, '_blank')}
+                    onClick={() => window.open(`/${affiliate.slug}`, '_blank')}
                   >
                     <ExternalLink className="w-4 h-4" />
                   </Button>
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => copyLink(affiliate.code)}
+                    onClick={() => copyLink(affiliate.slug)}
                   >
                     <Copy className="w-4 h-4" />
                   </Button>

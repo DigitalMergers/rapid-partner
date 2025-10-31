@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { CheckCircle2, Shield, Zap } from "lucide-react";
 
 export default function AffiliateLanding() {
-  const { code } = useParams<{ code: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const [affiliate, setAffiliate] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -24,12 +24,12 @@ export default function AffiliateLanding() {
 
   useEffect(() => {
     const fetchAffiliate = async () => {
-      if (!code) return;
+      if (!slug) return;
 
       const { data } = await supabase
         .from("affiliates")
         .select("*")
-        .eq("code", code)
+        .eq("slug", slug)
         .eq("status", "active")
         .single();
 
@@ -47,7 +47,7 @@ export default function AffiliateLanding() {
     };
 
     fetchAffiliate();
-  }, [code]);
+  }, [slug]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

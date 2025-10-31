@@ -105,7 +105,7 @@ export default function Admin() {
             icon={MousePointerClick}
           />
           <div 
-            onClick={() => navigate("/leads")}
+            onClick={() => navigate("/admin/leads")}
             className="cursor-pointer hover:scale-[1.02] transition-transform"
           >
             <KPICard
@@ -124,7 +124,7 @@ export default function Admin() {
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <button
-            onClick={() => navigate("/leads")}
+            onClick={() => navigate("/admin/leads")}
             className="glass-panel border border-border rounded-2xl p-6 text-left hover-lift hover:border-primary/50 transition-all"
           >
             <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
