@@ -17,45 +17,45 @@ export type Database = {
       affiliates: {
         Row: {
           code: string
-          company: string
+          company: string | null
           created_at: string
-          email: string
+          email: string | null
           first_name: string
           id: string
           last_name: string
-          phone: string
+          phone: string | null
           slug: string
           status: string
           updated_at: string
-          website: string
+          website: string | null
         }
         Insert: {
           code: string
-          company: string
+          company?: string | null
           created_at?: string
-          email: string
+          email?: string | null
           first_name: string
           id?: string
           last_name: string
-          phone: string
+          phone?: string | null
           slug: string
           status?: string
           updated_at?: string
-          website: string
+          website?: string | null
         }
         Update: {
           code?: string
-          company?: string
+          company?: string | null
           created_at?: string
-          email?: string
+          email?: string | null
           first_name?: string
           id?: string
           last_name?: string
-          phone?: string
+          phone?: string | null
           slug?: string
           status?: string
           updated_at?: string
-          website?: string
+          website?: string | null
         }
         Relationships: []
       }
