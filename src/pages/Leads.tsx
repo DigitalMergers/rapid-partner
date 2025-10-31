@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft, Mail, Phone, Globe, Building2, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface Lead {
   id: string;
@@ -27,12 +28,22 @@ interface Lead {
 
 export default function Leads() {
   const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Redirect to auth if not logged in
   useEffect(() => {
-    fetchLeads();
-  }, []);
+    if (!authLoading && !user) {
+      navigate("/auth");
+    }
+  }, [user, authLoading, navigate]);
+
+  useEffect(() => {
+    if (user) {
+      fetchLeads();
+    }
+  }, [user]);
 
   const fetchLeads = async () => {
     setLoading(true);
@@ -88,6 +99,18 @@ export default function Leads() {
         return "default";
     }
   };
+
+  if (authLoading || loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-background">

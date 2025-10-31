@@ -3,12 +3,15 @@ import { Button } from "@/components/ui/button";
 import { KPICard } from "@/components/KPICard";
 import { CreateAffiliateDialog } from "@/components/CreateAffiliateDialog";
 import { AffiliatesTable } from "@/components/AffiliatesTable";
-import { Users, MousePointerClick, UserCheck, DollarSign } from "lucide-react";
+import { Users, MousePointerClick, UserCheck, DollarSign, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 
 export default function Admin() {
   const navigate = useNavigate();
+  const { user, loading } = useAuth();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [affiliates, setAffiliates] = useState<any[]>([]);
   const [stats, setStats] = useState({
@@ -17,6 +20,13 @@ export default function Admin() {
     leads7d: 0,
     revenue30d: 0,
   });
+
+  // Redirect to auth if not logged in
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate("/auth");
+    }
+  }, [user, loading, navigate]);
 
   const fetchData = async () => {
     // Fetch affiliates
@@ -57,13 +67,50 @@ export default function Admin() {
     });
   };
 
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error("Failed to log out");
+    } else {
+      toast.success("Logged out successfully");
+      navigate("/auth");
+    }
+  };
+
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (user) {
+      fetchData();
+    }
+  }, [user]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto p-6 space-y-8">
+        {/* Header with logout */}
+        <div className="flex justify-end">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleLogout}
+            className="gap-2"
+          >
+            <LogOut className="w-4 h-4" />
+            Logout
+          </Button>
+        </div>
+
         {/* Hero Section */}
         <div className="glass-panel border border-border rounded-2xl p-12 relative overflow-hidden animate-fade-in-up">
           <div 
