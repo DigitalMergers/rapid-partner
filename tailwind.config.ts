@@ -22,6 +22,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -60,8 +61,15 @@ export default {
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "calc(var(--radius) - 4px)",
+        sm: "calc(var(--radius) - 8px)",
+        xl: "1.75rem",
+        "2xl": "2rem",
+      },
+      boxShadow: {
+        'sm': '0 4px 10px rgba(0, 0, 0, 0.28)',
+        'md': '0 10px 30px rgba(0, 0, 0, 0.35)',
+        'lg': '0 20px 60px rgba(0, 0, 0, 0.45)',
       },
       keyframes: {
         "accordion-down": {
