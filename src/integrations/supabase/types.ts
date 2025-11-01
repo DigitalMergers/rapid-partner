@@ -27,6 +27,7 @@ export type Database = {
           slug: string
           status: string
           updated_at: string
+          user_id: string | null
           website: string | null
         }
         Insert: {
@@ -41,6 +42,7 @@ export type Database = {
           slug: string
           status?: string
           updated_at?: string
+          user_id?: string | null
           website?: string | null
         }
         Update: {
@@ -55,6 +57,7 @@ export type Database = {
           slug?: string
           status?: string
           updated_at?: string
+          user_id?: string | null
           website?: string | null
         }
         Relationships: []
@@ -98,6 +101,13 @@ export type Database = {
             referencedRelation: "affiliates"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "clicks_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       conversions: {
@@ -137,6 +147,13 @@ export type Database = {
             columns: ["affiliate_id"]
             isOneToOne: false
             referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversions_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates_public"
             referencedColumns: ["id"]
           },
           {
@@ -185,6 +202,13 @@ export type Database = {
             columns: ["affiliate_id"]
             isOneToOne: false
             referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "landing_pages_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates_public"
             referencedColumns: ["id"]
           },
         ]
@@ -243,17 +267,74 @@ export type Database = {
             referencedRelation: "affiliates"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "leads_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates_public"
+            referencedColumns: ["id"]
+          },
         ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
       }
     }
     Views: {
-      [_ in never]: never
+      affiliates_public: {
+        Row: {
+          created_at: string | null
+          first_name: string | null
+          id: string | null
+          last_name: string | null
+          slug: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          first_name?: string | null
+          id?: string | null
+          last_name?: string | null
+          slug?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          first_name?: string | null
+          id?: string | null
+          last_name?: string | null
+          slug?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "affiliate"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -380,6 +461,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "affiliate"],
+    },
   },
 } as const
