@@ -6,6 +6,12 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { nanoid } from "nanoid";
+import { z } from "zod";
+
+const affiliateSchema = z.object({
+  first_name: z.string().trim().min(1, "First name is required").max(100),
+  last_name: z.string().trim().min(1, "Last name is required").max(100)
+});
 
 interface CreateAffiliateDialogProps {
   open: boolean;
@@ -26,17 +32,31 @@ export const CreateAffiliateDialog = ({ open, onOpenChange, onSuccess }: CreateA
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate form data
+    const validationResult = affiliateSchema.safeParse({
+      first_name: formData.first_name,
+      last_name: formData.last_name
+    });
+
+    if (!validationResult.success) {
+      const errors = validationResult.error.errors;
+      toast.error(errors[0].message);
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const slug = generateSlug(formData.first_name, formData.last_name);
+      const slug = generateSlug(validationResult.data.first_name, validationResult.data.last_name);
       const code = `${slug}-${nanoid(6)}`;
 
       // Insert affiliate
       const { data: affiliate, error: affiliateError } = await supabase
         .from("affiliates")
         .insert({
-          ...formData,
+          first_name: validationResult.data.first_name,
+          last_name: validationResult.data.last_name,
           slug,
           code,
           status: "active",
@@ -61,7 +81,7 @@ export const CreateAffiliateDialog = ({ open, onOpenChange, onSuccess }: CreateA
         .insert({
           affiliate_id: affiliate.id,
           is_template: false,
-          name: `LP - ${formData.first_name} ${formData.last_name}`,
+          name: `LP - ${validationResult.data.first_name} ${validationResult.data.last_name}`,
           blocks: template.blocks,
         });
 
@@ -81,7 +101,9 @@ export const CreateAffiliateDialog = ({ open, onOpenChange, onSuccess }: CreateA
       onOpenChange(false);
       onSuccess();
     } catch (error: any) {
-      console.error("Error creating affiliate:", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Error creating affiliate:", error);
+      }
       toast.error(error.message || "Failed to create affiliate");
     } finally {
       setLoading(false);

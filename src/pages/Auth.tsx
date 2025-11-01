@@ -7,6 +7,15 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { Shield } from "lucide-react";
+import { z } from "zod";
+
+const authSchema = z.object({
+  email: z.string().trim().email("Invalid email address").max(255),
+  password: z.string().min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number")
+});
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -28,14 +37,24 @@ export default function Auth() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.email || !formData.password) {
-      toast.error("Please fill in all fields");
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      toast.error("Password must be at least 6 characters");
-      return;
+    // Validate credentials (only enforce strict validation on signup)
+    if (!isLogin) {
+      const validationResult = authSchema.safeParse({ 
+        email: formData.email, 
+        password: formData.password 
+      });
+      
+      if (!validationResult.success) {
+        const errors = validationResult.error.errors;
+        toast.error(errors[0].message);
+        return;
+      }
+    } else {
+      // For login, just check basic requirements
+      if (!formData.email || !formData.password) {
+        toast.error("Please fill in all fields");
+        return;
+      }
     }
 
     setLoading(true);
@@ -83,6 +102,9 @@ export default function Auth() {
       }
     } catch (error: any) {
       toast.error("Something went wrong. Please try again.");
+      if (process.env.NODE_ENV === 'development') {
+        console.error(error);
+      }
     } finally {
       setLoading(false);
     }
@@ -132,7 +154,7 @@ export default function Auth() {
               />
               {!isLogin && (
                 <p className="text-xs text-muted-foreground">
-                  Must be at least 6 characters
+                  Must be at least 8 characters with uppercase, lowercase, and number
                 </p>
               )}
             </div>

@@ -7,6 +7,16 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { CheckCircle2, Shield, Zap } from "lucide-react";
+import { z } from "zod";
+
+const leadSchema = z.object({
+  first_name: z.string().trim().min(1, "First name is required").max(100, "First name must be less than 100 characters"),
+  last_name: z.string().trim().min(1, "Last name is required").max(100, "Last name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  phone: z.string().trim().regex(/^\+?[1-9]\d{1,14}$/, "Invalid phone number format (use international format)"),
+  company: z.string().trim().min(1, "Company is required").max(200, "Company name must be less than 200 characters"),
+  website: z.string().trim().url("Invalid website URL").max(500, "Website URL must be less than 500 characters")
+});
 
 export default function AffiliateLanding() {
   const { slug } = useParams<{ slug: string }>();
@@ -26,9 +36,10 @@ export default function AffiliateLanding() {
     const fetchAffiliate = async () => {
       if (!slug) return;
 
+      // Only fetch non-sensitive fields (no email, phone, company, website)
       const { data } = await supabase
         .from("affiliates")
-        .select("*")
+        .select("id, slug, first_name, last_name, code")
         .eq("slug", slug)
         .eq("status", "active")
         .single();
@@ -57,18 +68,34 @@ export default function AffiliateLanding() {
       return;
     }
 
+    // Validate form data
+    const validationResult = leadSchema.safeParse({
+      first_name: formData.first_name,
+      last_name: formData.last_name,
+      email: formData.email,
+      phone: formData.phone,
+      company: formData.company,
+      website: formData.website
+    });
+
+    if (!validationResult.success) {
+      const errors = validationResult.error.errors;
+      toast.error(errors[0].message);
+      return;
+    }
+
     setLoading(true);
 
     try {
       const { error } = await supabase.from("leads").insert({
         affiliate_id: affiliate.id,
         code: affiliate.code,
-        first_name: formData.first_name,
-        last_name: formData.last_name,
-        email: formData.email,
-        phone: formData.phone,
-        company: formData.company,
-        website: formData.website,
+        first_name: validationResult.data.first_name,
+        last_name: validationResult.data.last_name,
+        email: validationResult.data.email,
+        phone: validationResult.data.phone,
+        company: validationResult.data.company,
+        website: validationResult.data.website,
         consented: true,
         payload: {
           source_path: window.location.pathname,
@@ -92,7 +119,9 @@ export default function AffiliateLanding() {
       });
     } catch (error: any) {
       toast.error("Something went sideways. Try again.");
-      console.error(error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error(error);
+      }
     } finally {
       setLoading(false);
     }

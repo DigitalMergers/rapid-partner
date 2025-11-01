@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft, Mail, Phone, Globe, Building2, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 
 interface Lead {
   id: string;
@@ -74,7 +75,10 @@ export default function Leads() {
       .eq("id", leadId);
 
     if (error) {
-      console.error("Error updating lead status:", error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Error updating lead status:", error);
+      }
+      toast.error("Failed to update lead status");
     } else {
       fetchLeads();
     }

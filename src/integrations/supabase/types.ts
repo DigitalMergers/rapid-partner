@@ -101,13 +101,6 @@ export type Database = {
             referencedRelation: "affiliates"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "clicks_affiliate_id_fkey"
-            columns: ["affiliate_id"]
-            isOneToOne: false
-            referencedRelation: "affiliates_public"
-            referencedColumns: ["id"]
-          },
         ]
       }
       conversions: {
@@ -147,13 +140,6 @@ export type Database = {
             columns: ["affiliate_id"]
             isOneToOne: false
             referencedRelation: "affiliates"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "conversions_affiliate_id_fkey"
-            columns: ["affiliate_id"]
-            isOneToOne: false
-            referencedRelation: "affiliates_public"
             referencedColumns: ["id"]
           },
           {
@@ -202,13 +188,6 @@ export type Database = {
             columns: ["affiliate_id"]
             isOneToOne: false
             referencedRelation: "affiliates"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "landing_pages_affiliate_id_fkey"
-            columns: ["affiliate_id"]
-            isOneToOne: false
-            referencedRelation: "affiliates_public"
             referencedColumns: ["id"]
           },
         ]
@@ -267,13 +246,6 @@ export type Database = {
             referencedRelation: "affiliates"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "leads_affiliate_id_fkey"
-            columns: ["affiliate_id"]
-            isOneToOne: false
-            referencedRelation: "affiliates_public"
-            referencedColumns: ["id"]
-          },
         ]
       }
       user_roles: {
@@ -299,30 +271,7 @@ export type Database = {
       }
     }
     Views: {
-      affiliates_public: {
-        Row: {
-          created_at: string | null
-          first_name: string | null
-          id: string | null
-          last_name: string | null
-          slug: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          first_name?: string | null
-          id?: string | null
-          last_name?: string | null
-          slug?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          first_name?: string | null
-          id?: string | null
-          last_name?: string | null
-          slug?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       has_role: {
