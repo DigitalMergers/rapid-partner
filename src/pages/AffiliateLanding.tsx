@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { CheckCircle2, Shield, Zap } from "lucide-react";
+import { CheckCircle2, Shield, Zap, AlertCircle } from "lucide-react";
 import { z } from "zod";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const leadSchema = z.object({
   first_name: z.string().trim().min(1, "First name is required").max(100, "First name must be less than 100 characters"),
@@ -20,8 +21,11 @@ const leadSchema = z.object({
 
 export default function AffiliateLanding() {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const [affiliate, setAffiliate] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -34,18 +38,46 @@ export default function AffiliateLanding() {
 
   useEffect(() => {
     const fetchAffiliate = async () => {
-      if (!slug) return;
+      if (!slug) {
+        setError("No affiliate identifier provided");
+        setIsLoading(false);
+        return;
+      }
 
-      // Only fetch non-sensitive fields (no email, phone, company, website)
-      const { data } = await supabase
-        .from("affiliates")
-        .select("id, slug, first_name, last_name, code")
-        .eq("slug", slug)
-        .eq("status", "active")
-        .single();
+      const timeoutId = setTimeout(() => {
+        if (isLoading) {
+          setError("Request timed out. Please try again.");
+          setIsLoading(false);
+        }
+      }, 10000);
 
-      if (data) {
+      try {
+        const { data, error: fetchError } = await supabase
+          .from("affiliates")
+          .select("id, slug, first_name, last_name, code")
+          .eq("slug", slug)
+          .eq("status", "active")
+          .maybeSingle();
+
+        clearTimeout(timeoutId);
+
+        if (fetchError) {
+          console.error("Database error:", fetchError);
+          setError("Unable to load affiliate information. Please try again later.");
+          setIsLoading(false);
+          return;
+        }
+
+        if (!data) {
+          setError("Affiliate not found");
+          setIsLoading(false);
+          setTimeout(() => navigate("/404", { replace: true }), 2000);
+          return;
+        }
+
         setAffiliate(data);
+        setIsLoading(false);
+
         // Track click
         await supabase.from("clicks").insert({
           affiliate_id: data.id,
@@ -54,11 +86,16 @@ export default function AffiliateLanding() {
           ip: null,
           ua: navigator.userAgent,
         });
+      } catch (err) {
+        clearTimeout(timeoutId);
+        console.error("Unexpected error:", err);
+        setError("An unexpected error occurred. Please try again.");
+        setIsLoading(false);
       }
     };
 
     fetchAffiliate();
-  }, [slug]);
+  }, [slug, navigate, isLoading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,7 +121,7 @@ export default function AffiliateLanding() {
       return;
     }
 
-    setLoading(true);
+    setSubmitting(true);
 
     try {
       const { error } = await supabase.from("leads").insert({
@@ -123,14 +160,45 @@ export default function AffiliateLanding() {
         console.error(error);
       }
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
-  if (!affiliate) {
+  if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="text-muted-foreground">Loading...</p>
+      <div className="min-h-screen bg-background">
+        <div className="max-w-6xl mx-auto px-6 py-12 space-y-16">
+          <div className="glass-panel border border-border rounded-2xl p-12">
+            <div className="text-center max-w-3xl mx-auto space-y-6">
+              <Skeleton className="h-8 w-48 mx-auto" />
+              <Skeleton className="h-16 w-full" />
+              <Skeleton className="h-6 w-3/4 mx-auto" />
+              <Skeleton className="h-12 w-40 mx-auto" />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[1, 2, 3].map((i) => (
+              <Skeleton key={i} className="h-48 rounded-xl" />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !affiliate) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-6">
+        <div className="glass-panel border border-border rounded-2xl p-8 max-w-md text-center">
+          <AlertCircle className="w-16 h-16 text-destructive mx-auto mb-4" />
+          <h2 className="text-2xl font-bold mb-2">Affiliate Not Found</h2>
+          <p className="text-muted-foreground mb-6">
+            {error || "The affiliate you're looking for doesn't exist or is no longer active."}
+          </p>
+          <Button onClick={() => navigate("/404", { replace: true })} variant="outline">
+            Go Back
+          </Button>
+        </div>
       </div>
     );
   }
@@ -298,11 +366,11 @@ export default function AffiliateLanding() {
 
             <Button
               type="submit"
-              disabled={loading}
+              disabled={submitting}
               className="w-full bg-gradient-to-r from-primary to-primary-glow"
               size="lg"
             >
-              {loading ? "Submitting..." : "Submit"}
+              {submitting ? "Submitting..." : "Submit"}
             </Button>
           </form>
         </div>
