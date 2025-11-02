@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calendar, Clock, MapPin, Users, Handshake, TrendingUp, Network, Award } from "lucide-react";
+import { Calendar, Clock, MapPin, Users, Handshake, TrendingUp, Network, Award, Megaphone, UserCheck, BookOpen, Zap } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -196,6 +196,79 @@ const Event = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Network Benefits Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-3xl sm:text-5xl font-bold">
+              Are you<br />
+              <span className="text-4xl sm:text-6xl">Sick of getting lost in the crowd?</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              We're designing a network to recognize members' strengths and keep them connected long after the event.
+            </p>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="border border-border bg-card/50 hover:bg-card transition-colors">
+              <CardHeader className="text-center pb-4">
+                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <Megaphone className="w-9 h-9 text-primary" />
+                </div>
+                <CardTitle className="text-xl">Sponsorship Events</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Host spotlight sessions to elevate your brand
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border border-border bg-card/50 hover:bg-card transition-colors">
+              <CardHeader className="text-center pb-4">
+                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <UserCheck className="w-9 h-9 text-primary" />
+                </div>
+                <CardTitle className="text-xl">Strategic Matchmaking</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Warm intros curated by goals and sector
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border border-border bg-card/50 hover:bg-card transition-colors">
+              <CardHeader className="text-center pb-4">
+                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <BookOpen className="w-9 h-9 text-primary" />
+                </div>
+                <CardTitle className="text-xl">Business Directory</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Searchable member profiles and company database
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border border-border bg-card/50 hover:bg-card transition-colors">
+              <CardHeader className="text-center pb-4">
+                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <Zap className="w-9 h-9 text-primary" />
+                </div>
+                <CardTitle className="text-xl">Rapid Fire Intros</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-muted-foreground">
+                  Dedicated calls to let our group know what you do, and who you're looking for
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
