@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar, Clock, MapPin, Users, Handshake, TrendingUp, Network, Award, Megaphone, UserCheck, BookOpen, Zap, Car, Wifi, Armchair, Presentation, Coffee } from "lucide-react";
@@ -786,6 +787,106 @@ const Event = () => {
               </form>
             </DialogContent>
           </Dialog>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-16 md:py-24 bg-muted/30">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Frequently Asked Questions</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">Common questions about registering for our investor network.</p>
+          </div>
+
+          <Accordion type="single" collapsible className="max-w-3xl mx-auto">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>What kind of events will you host?</AccordionTrigger>
+              <AccordionContent>
+                We plan to host investor mixers, sponsor showcases, and themed sessions like "AI Workshop." Register to be notified when dates and locations are announced.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Who should attend?</AccordionTrigger>
+              <AccordionContent>
+                Founders, investors, operators, and service sponsors looking for strategic partnerships and deal flow.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>How do I become a sponsor?</AccordionTrigger>
+              <AccordionContent>
+                Visit the Sponsors section to see options and apply. You can also use the "Become a Sponsor" button.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-4">
+              <AccordionTrigger>Is registration free?</AccordionTrigger>
+              <AccordionContent>
+                Yes, registration is completely free. You'll be the first to know about upcoming events and have early access to registration.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-5">
+              <AccordionTrigger className="text-left">When will events be announced?</AccordionTrigger>
+              <AccordionContent>
+                We're planning our first events for 2025. Registered members will receive early notification with dates, locations, and registration details.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-6">
+              <AccordionTrigger>How do I register?</AccordionTrigger>
+              <AccordionContent>
+                Simply click any "Register Now" button on this page to get started. We'll keep you updated on all upcoming events and opportunities.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+
+          {/* SEO Schema Markup for FAQPage */}
+          <script type="application/ld+json" dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [{
+                "@type": "Question",
+                "name": "What is the format of the events?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Mixers/Sponsor showcases and themed sessions like 'AI Workshop.' Dates, times, and locations are TBD."
+                }
+              }, {
+                "@type": "Question",
+                "name": "Who should attend?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Founders, investors, operators, and service sponsors looking for strategic partnerships and deal flow."
+                }
+              }, {
+                "@type": "Question",
+                "name": "How do I become a sponsor?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Visit the Sponsors section to see options and apply, or use the 'Become a Sponsor' button."
+                }
+              }, {
+                "@type": "Question",
+                "name": "Is there a refund policy?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes—sponsor passes are refundable up to 1 week before the event. Member RSVP is free."
+                }
+              }, {
+                "@type": "Question",
+                "name": "How can I get notified about future events?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Use the 'Get Notified' buttons in the Agenda section or join free at the top of this page."
+                }
+              }, {
+                "@type": "Question",
+                "name": "How do I get started?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Just talk to the team, sign the agreement, and secure your booth."
+                }
+              }]
+            })
+          }} />
         </div>
       </section>
     </div>
