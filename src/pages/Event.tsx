@@ -3,8 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calendar, Clock, MapPin, Users, Handshake, TrendingUp, Network, Award, Megaphone, UserCheck, BookOpen, Zap } from "lucide-react";
+import { Calendar, Clock, MapPin, Users, Handshake, TrendingUp, Network, Award, Megaphone, UserCheck, BookOpen, Zap, Car, Wifi, Armchair, Presentation, Coffee } from "lucide-react";
 import { motion } from "framer-motion";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import venueNetworkingEvent from "@/assets/venue-networking.jpg";
+import venueConference from "@/assets/venue-conference.jpg";
 import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -395,6 +398,122 @@ const Event = () => {
                 </motion.div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Venue Highlights Section */}
+      <section className="py-16 md:py-24 bg-muted/30">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Venue Highlights</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              A premium location designed for meaningful connections and professional networking
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Image Carousel */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="absolute -inset-4 bg-gradient-to-br from-fuchsia-600/20 via-violet-600/20 to-indigo-600/20 blur-2xl rounded-3xl" />
+              <Carousel className="relative rounded-3xl overflow-hidden" opts={{ loop: true }}>
+                <CarouselContent>
+                  <CarouselItem>
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                      <img 
+                        src={venueNetworkingEvent} 
+                        alt="AI and M&A networking event in San Antonio with attendees"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </CarouselItem>
+                  <CarouselItem>
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                      <img 
+                        src={venueConference} 
+                        alt="Conference room with presentation setup and modern lighting"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </CarouselItem>
+                </CarouselContent>
+                <CarouselPrevious className="left-4" />
+                <CarouselNext className="right-4" />
+              </Carousel>
+            </motion.div>
+
+            {/* Amenities List */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
+            >
+              <div className="flex items-start gap-4 group">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-fuchsia-600/10 to-violet-600/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <MapPin className="w-5 h-5 text-fuchsia-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Prime Location</h4>
+                  <p className="text-sm text-muted-foreground">1602 Thousand Oaks Dr, San Antonio, TX 78232</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 group">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-600/10 to-indigo-600/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Car className="w-5 h-5 text-violet-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Ample Parking</h4>
+                  <p className="text-sm text-muted-foreground">Free parking available for all attendees</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 group">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600/10 to-cyan-600/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Wifi className="w-5 h-5 text-indigo-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">High-Speed WiFi</h4>
+                  <p className="text-sm text-muted-foreground">Reliable connectivity throughout the venue</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 group">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-600/10 to-fuchsia-600/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Armchair className="w-5 h-5 text-cyan-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Tables and Chairs Included</h4>
+                  <p className="text-sm text-muted-foreground">Comfortable seating arrangements provided</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 group">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-600/10 to-fuchsia-600/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Presentation className="w-5 h-5 text-violet-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">AV Equipment</h4>
+                  <p className="text-sm text-muted-foreground">Professional presentation setup included</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 group">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600/10 to-violet-600/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <Coffee className="w-5 h-5 text-indigo-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-1">Coffee Bar</h4>
+                  <p className="text-sm text-muted-foreground">Premium coffee and beverages available</p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
