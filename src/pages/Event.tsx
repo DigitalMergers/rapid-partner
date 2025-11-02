@@ -537,7 +537,7 @@ const Event = () => {
             }}>
               <CarouselContent className="-ml-2 md:-ml-4">
                 {/* Justice Anderson - Featured Speaker */}
-                <CarouselItem className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                <CarouselItem className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} 
                     whileInView={{ opacity: 1, y: 0 }} 
@@ -579,7 +579,7 @@ const Event = () => {
                 </CarouselItem>
 
                 {/* John Thornton - Featured Speaker */}
-                <CarouselItem className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                <CarouselItem className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} 
                     whileInView={{ opacity: 1, y: 0 }} 
@@ -621,7 +621,7 @@ const Event = () => {
 
                 {/* TBD Speakers - Placeholder Cards */}
                 {[1, 2, 3, 4].map(index => (
-                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
                     <motion.div 
                       initial={{ opacity: 0, y: 20 }} 
                       whileInView={{ opacity: 1, y: 0 }} 
