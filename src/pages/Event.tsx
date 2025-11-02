@@ -273,53 +273,6 @@ const Event = () => {
         </div>
       </section>
 
-      {/* Event Details */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="border-2 hover:border-primary transition-colors">
-              <CardHeader>
-                <Calendar className="w-10 h-10 text-primary mb-3" />
-                <CardTitle className="text-lg">Date</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-foreground font-semibold">November 6th, 2025</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-primary transition-colors">
-              <CardHeader>
-                <Clock className="w-10 h-10 text-primary mb-3" />
-                <CardTitle className="text-lg">Time</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-foreground font-semibold">10:15 AM - 1:45 PM</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-primary transition-colors">
-              <CardHeader>
-                <MapPin className="w-10 h-10 text-primary mb-3" />
-                <CardTitle className="text-lg">Location</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-foreground font-semibold text-sm">1602 Thousand Oaks Dr, San Antonio, TX 78232</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-primary transition-colors">
-              <CardHeader>
-                <Users className="w-10 h-10 text-primary mb-3" />
-                <CardTitle className="text-lg">Format</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-foreground font-semibold">In-Person Mixer</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Benefits Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
