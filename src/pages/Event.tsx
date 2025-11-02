@@ -518,6 +518,132 @@ const Event = () => {
         </div>
       </section>
 
+      {/* Speaker Lineup Section */}
+      <section id="speakers" className="py-16 md:py-24 bg-muted/30">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4">Speaker Lineup</h2>
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+              Meet the industry leaders and experts sharing insights at our upcoming event.
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <Carousel className="w-full" opts={{
+              align: "start",
+              loop: true
+            }}>
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {/* Justice Anderson - Featured Speaker */}
+                <CarouselItem className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    transition={{ duration: 0.5 }} 
+                    className="h-full"
+                  >
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Card className="rounded-3xl bg-gradient-to-br from-fuchsia-600/5 via-violet-600/5 to-indigo-600/5 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-fuchsia-600/20 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:scale-105 h-full">
+                          <CardContent className="p-4 sm:p-6 text-center h-full flex flex-col items-center justify-center">
+                            <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-fuchsia-600 to-violet-600 rounded-2xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg overflow-hidden">
+                              <img src="/lovable-uploads/justice-anderson.png" alt="Justice Anderson" className="w-full h-full object-cover object-center" />
+                            </div>
+                            <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Justice Anderson</h3>
+                            <p className="text-xs sm:text-sm text-fuchsia-400 font-medium mb-2">Founder of the Strategic Partner Network</p>
+                            <Button variant="link" className="text-xs text-muted-foreground p-0 h-auto">Learn More →</Button>
+                          </CardContent>
+                        </Card>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-md">
+                        <DialogHeader>
+                          <DialogTitle className="text-center">Justice Anderson</DialogTitle>
+                        </DialogHeader>
+                        <div className="flex flex-col items-center gap-4 py-4">
+                          <div className="w-32 h-32 bg-gradient-to-br from-fuchsia-600 to-violet-600 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
+                            <img src="/lovable-uploads/justice-anderson.png" alt="Justice Anderson" className="w-full h-full object-cover object-center" />
+                          </div>
+                          <p className="text-sm text-fuchsia-400 font-medium">Founder of the Strategic Partner Network</p>
+                          <p className="text-sm text-muted-foreground text-center">
+                            Justice is an Investor in the M&A and Real Estate space that has completed 430+ Transactions. 
+                            His main focus now is trying to help integrate AI solutions into as many businesses as he can to assist in the adoption of the overwhelming technology.
+                          </p>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  </motion.div>
+                </CarouselItem>
+
+                {/* John Thornton - Featured Speaker */}
+                <CarouselItem className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    transition={{ duration: 0.5, delay: 0.1 }} 
+                    className="h-full"
+                  >
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Card className="rounded-3xl bg-gradient-to-br from-fuchsia-600/5 via-violet-600/5 to-indigo-600/5 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-violet-600/20 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:scale-105 h-full">
+                          <CardContent className="p-4 sm:p-6 text-center h-full flex flex-col items-center justify-center">
+                            <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-slate-200 to-slate-300 rounded-2xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg overflow-hidden">
+                              <img src="/lovable-uploads/speaker-professional.png" alt="Featured Speaker" className="w-full h-full object-cover object-center" />
+                            </div>
+                            <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">John Thornton</h3>
+                            <p className="text-xs sm:text-sm text-violet-400 font-medium mb-2">Business Developer of BookkeeperSA</p>
+                            <Button variant="link" className="text-xs text-muted-foreground p-0 h-auto">Learn More →</Button>
+                          </CardContent>
+                        </Card>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-md">
+                        <DialogHeader>
+                          <DialogTitle className="text-center">John Thornton</DialogTitle>
+                        </DialogHeader>
+                        <div className="flex flex-col items-center gap-4 py-4">
+                          <div className="w-32 h-32 bg-gradient-to-br from-slate-200 to-slate-300 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
+                            <img src="/lovable-uploads/speaker-professional.png" alt="Featured Speaker" className="w-full h-full object-cover object-center" />
+                          </div>
+                          <p className="text-sm text-violet-400 font-medium">Business Developer of BookkeeperSA</p>
+                          <p className="text-sm text-muted-foreground text-center">
+                            John Thornton has extensive experience in bookkeeping, payroll, tax preparation, and financial analysis—helping businesses stay organized and financially strong. As head of business development at BookkeeperSA, he creates strategies that simplify operations and drive growth for entrepreneurs.
+                          </p>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  </motion.div>
+                </CarouselItem>
+
+                {/* TBD Speakers - Placeholder Cards */}
+                {[1, 2, 3, 4].map(index => (
+                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }} 
+                      whileInView={{ opacity: 1, y: 0 }} 
+                      transition={{ duration: 0.5, delay: (index + 1) * 0.1 }}
+                    >
+                      <Card className="h-full rounded-3xl bg-gradient-to-br from-slate-800/50 via-slate-700/50 to-slate-600/50 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-slate-600/30 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                        <CardContent className="p-6 text-center h-full flex flex-col items-center">
+                          <div className="w-32 h-32 bg-gradient-to-br from-slate-600 to-slate-700 rounded-2xl flex items-center justify-center mb-4 shadow-lg overflow-hidden">
+                            <span className="text-3xl font-bold text-slate-300">?</span>
+                          </div>
+                          <h3 className="text-xl font-semibold mb-2 text-slate-300">Speaker {index + 1}</h3>
+                          <p className="text-sm text-slate-400 mb-3 font-medium">TBD</p>
+                          <p className="text-sm text-slate-500 flex-grow">
+                            More speakers to be announced soon. Stay tuned for exciting updates on industry experts joining our lineup.
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex" />
+              <CarouselNext className="hidden md:flex" />
+            </Carousel>
+          </div>
+        </div>
+      </section>
+
       {/* Benefits Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
