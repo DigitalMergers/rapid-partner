@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import venueNetworkingEvent from "@/assets/venue-networking.jpg";
 import venueConference from "@/assets/venue-conference.jpg";
+import justiceAndersonPhoto from "@/assets/justice-anderson.png";
 import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -548,7 +549,7 @@ const Event = () => {
                         <Card className="rounded-3xl bg-gradient-to-br from-fuchsia-600/5 via-violet-600/5 to-indigo-600/5 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-fuchsia-600/20 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:scale-105 h-full overflow-hidden">
                           <CardContent className="p-0 text-center h-full flex flex-col">
                             <div className="w-full h-64 bg-gradient-to-br from-fuchsia-600 to-violet-600 flex items-center justify-center shadow-lg overflow-hidden">
-                              <img src="/lovable-uploads/justice-anderson.png" alt="Justice Anderson" className="w-full h-full object-cover object-center" />
+                              <img src={justiceAndersonPhoto} alt="Justice Anderson" className="w-full h-full object-cover object-center" />
                             </div>
                             <div className="p-6">
                               <h3 className="text-xl font-semibold mb-2">Justice Anderson</h3>
@@ -564,7 +565,7 @@ const Event = () => {
                         </DialogHeader>
                         <div className="flex flex-col items-center gap-4 py-4">
                           <div className="w-32 h-32 bg-gradient-to-br from-fuchsia-600 to-violet-600 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
-                            <img src="/lovable-uploads/justice-anderson.png" alt="Justice Anderson" className="w-full h-full object-cover object-center" />
+                            <img src={justiceAndersonPhoto} alt="Justice Anderson" className="w-full h-full object-cover object-center" />
                           </div>
                           <p className="text-sm text-fuchsia-400 font-medium">Founder of the Strategic Partner Network</p>
                           <p className="text-sm text-muted-foreground text-center">
