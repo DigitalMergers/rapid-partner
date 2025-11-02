@@ -548,7 +548,7 @@ const Event = () => {
                       <DialogTrigger asChild>
                         <Card className="rounded-3xl bg-gradient-to-br from-fuchsia-600/5 via-violet-600/5 to-indigo-600/5 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-fuchsia-600/20 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:scale-105 h-full overflow-hidden">
                           <CardContent className="p-0 text-center h-full flex flex-col">
-                            <div className="w-full h-64 bg-gradient-to-br from-fuchsia-600 to-violet-600 flex items-center justify-center shadow-lg overflow-hidden">
+                            <div className="w-full h-80 bg-gradient-to-br from-fuchsia-600 to-violet-600 flex items-center justify-center shadow-lg overflow-hidden">
                               <img src={justiceAndersonPhoto} alt="Justice Anderson" className="w-full h-full object-cover object-center" />
                             </div>
                             <div className="p-6">
@@ -590,7 +590,7 @@ const Event = () => {
                       <DialogTrigger asChild>
                         <Card className="rounded-3xl bg-gradient-to-br from-fuchsia-600/5 via-violet-600/5 to-indigo-600/5 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-violet-600/20 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:scale-105 h-full overflow-hidden">
                           <CardContent className="p-0 text-center h-full flex flex-col">
-                            <div className="w-full h-64 bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center shadow-lg overflow-hidden">
+                            <div className="w-full h-80 bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center shadow-lg overflow-hidden">
                               <img src="/lovable-uploads/speaker-professional.png" alt="Featured Speaker" className="w-full h-full object-cover object-center" />
                             </div>
                             <div className="p-6">
@@ -629,7 +629,7 @@ const Event = () => {
                     >
                       <Card className="h-full rounded-3xl bg-gradient-to-br from-slate-800/50 via-slate-700/50 to-slate-600/50 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-slate-600/30 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
                         <CardContent className="p-0 text-center h-full flex flex-col">
-                          <div className="w-full h-64 bg-gradient-to-br from-slate-600 to-slate-700 flex items-center justify-center shadow-lg overflow-hidden">
+                          <div className="w-full h-80 bg-gradient-to-br from-slate-600 to-slate-700 flex items-center justify-center shadow-lg overflow-hidden">
                             <span className="text-6xl font-bold text-slate-300">?</span>
                           </div>
                           <div className="p-6 flex flex-col flex-grow">
