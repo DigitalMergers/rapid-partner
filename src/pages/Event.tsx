@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar, Clock, MapPin, Users, Handshake, TrendingUp, Network, Award, Megaphone, UserCheck, BookOpen, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -269,6 +270,131 @@ const Event = () => {
                 </p>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Event Agenda Section */}
+      <section id="agenda" className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4">Event Agenda</h2>
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto mb-2">
+              November 6th, 2025 • In-Person Mixer • 10:30 AM – 1:30 PM
+            </p>
+            <p className="text-xs sm:text-sm text-muted-foreground italic">(Times are estimates and may vary)</p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-4 md:left-1/2 md:-translate-x-0.5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-fuchsia-600 via-violet-600 to-indigo-600"></div>
+              
+              <div className="space-y-8">
+                {/* 10:15 - 10:40 AM */}
+                <motion.div className="relative flex items-center" initial={{
+                  opacity: 0,
+                  x: -20
+                }} whileInView={{
+                  opacity: 1,
+                  x: 0
+                }} transition={{
+                  duration: 0.5
+                }}>
+                  <div className="absolute left-2 md:left-1/2 md:-translate-x-1/2 w-4 h-4 bg-fuchsia-600 rounded-full border-4 border-background shadow-lg"></div>
+                  <div className="ml-12 md:ml-0 md:w-1/2 md:pr-8">
+                    <Card className="rounded-2xl bg-gradient-to-br from-fuchsia-600/5 to-transparent backdrop-blur border-fuchsia-600/20 shadow-lg">
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Clock className="h-4 w-4 text-fuchsia-400" />
+                          <span className="font-semibold text-fuchsia-400">10:15 – 10:40 AM</span>
+                        </div>
+                        <h3 className="font-semibold mb-2">Early Arrival & Check-in</h3>
+                        <p className="text-muted-foreground text-sm">Arrive early, check in, and get your name tag. Light mingling and coffee.</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </motion.div>
+
+                {/* 10:45 - 12:00 PM */}
+                <motion.div className="relative flex items-center md:justify-end" initial={{
+                  opacity: 0,
+                  x: 20
+                }} whileInView={{
+                  opacity: 1,
+                  x: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: 0.1
+                }}>
+                  <div className="absolute left-2 md:left-1/2 md:-translate-x-1/2 w-4 h-4 bg-violet-600 rounded-full border-4 border-background shadow-lg"></div>
+                  <div className="ml-12 md:ml-0 md:w-1/2 md:pl-8">
+                    <Card className="rounded-2xl bg-gradient-to-br from-violet-600/5 to-transparent backdrop-blur border-violet-600/20 shadow-lg">
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Clock className="h-4 w-4 text-violet-400" />
+                          <span className="font-semibold text-violet-400">10:45 – 12:00 PM</span>
+                        </div>
+                        <h3 className="font-semibold mb-2">Welcome & AI Insights</h3>
+                        <p className="text-muted-foreground text-sm">Brief talk: welcome, quick sponsor intros, and where AI is heading + Sponsors on Business growth and Investing</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </motion.div>
+
+                {/* 12:00 - 12:20 PM */}
+                <motion.div className="relative flex items-center" initial={{
+                  opacity: 0,
+                  x: -20
+                }} whileInView={{
+                  opacity: 1,
+                  x: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: 0.2
+                }}>
+                  <div className="absolute left-2 md:left-1/2 md:-translate-x-1/2 w-4 h-4 bg-indigo-600 rounded-full border-4 border-background shadow-lg"></div>
+                  <div className="ml-12 md:ml-0 md:w-1/2 md:pr-8">
+                    <Card className="rounded-2xl bg-gradient-to-br from-indigo-600/5 to-transparent backdrop-blur border-indigo-600/20 shadow-lg">
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Clock className="h-4 w-4 text-indigo-400" />
+                          <span className="font-semibold text-indigo-400">12:00 – 12:20 PM</span>
+                        </div>
+                        <h3 className="font-semibold mb-2">Rapid Fire Intros</h3>
+                        <p className="text-muted-foreground text-sm">Quick introductions to get to know each other and discover opportunities.</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </motion.div>
+
+                {/* 12:20 PM - 1:45 PM */}
+                <motion.div className="relative flex items-center md:justify-end" initial={{
+                  opacity: 0,
+                  x: 20
+                }} whileInView={{
+                  opacity: 1,
+                  x: 0
+                }} transition={{
+                  duration: 0.5,
+                  delay: 0.3
+                }}>
+                  <div className="absolute left-2 md:left-1/2 md:-translate-x-1/2 w-4 h-4 bg-cyan-600 rounded-full border-4 border-background shadow-lg"></div>
+                  <div className="ml-12 md:ml-0 md:w-1/2 md:pl-8">
+                    <Card className="rounded-2xl bg-gradient-to-br from-cyan-600/5 to-transparent backdrop-blur border-cyan-600/20 shadow-lg">
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Clock className="h-4 w-4 text-cyan-400" />
+                          <span className="font-semibold text-cyan-400">12:20 PM – 1:45 PM</span>
+                        </div>
+                        <h3 className="font-semibold mb-2">Open Networking</h3>
+                        <p className="text-muted-foreground text-sm">Open networking and conversations. Connect with fellow attendees and build valuable relationships.</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
