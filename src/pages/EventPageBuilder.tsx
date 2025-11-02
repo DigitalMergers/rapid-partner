@@ -10,12 +10,16 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import venueNetworkingEvent from "@/assets/venue-networking.jpg";
 import venueConference from "@/assets/venue-conference.jpg";
 import justiceAndersonPhoto from "@/assets/justice-anderson.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { CountdownTimer } from "@/components/CountdownTimer";
 
-const Event = () => {
+const EventPageBuilder = () => {
+  useEffect(() => {
+    document.title = "Event Page Builder - Strategic Partner Network";
+  }, []);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -900,4 +904,4 @@ const Event = () => {
   );
 };
 
-export default Event;
+export default EventPageBuilder;
