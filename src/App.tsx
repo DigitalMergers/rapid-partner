@@ -9,6 +9,7 @@ import Leads from "./pages/Leads";
 import Auth from "./pages/Auth";
 import AffiliateLanding from "./pages/AffiliateLanding";
 import EventPageBuilder from "./pages/EventPageBuilder";
+import AffiliateEventPage from "./pages/AffiliateEventPage";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/leads" element={<Leads />} />
             <Route path="/event" element={<EventPageBuilder />} />
+            <Route path="/:slug/event" element={<AffiliateEventPage />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="/:slug" element={<AffiliateLanding />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

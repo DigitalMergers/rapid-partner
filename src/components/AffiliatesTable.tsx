@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Copy } from "lucide-react";
+import { ExternalLink, Copy, CalendarCheck } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -22,8 +22,10 @@ interface AffiliatesTableProps {
 }
 
 export const AffiliatesTable = ({ affiliates, onUpdate }: AffiliatesTableProps) => {
-  const copyLink = async (slug: string) => {
-    const link = `${window.location.origin}/${slug}`;
+  const copyLink = async (slug: string, isEvent = false) => {
+    const link = isEvent 
+      ? `${window.location.origin}/${slug}/event`
+      : `${window.location.origin}/${slug}`;
     await navigator.clipboard.writeText(link);
     toast.success("Link copied to clipboard");
   };
@@ -61,6 +63,7 @@ export const AffiliatesTable = ({ affiliates, onUpdate }: AffiliatesTableProps) 
             <TableHead>Name</TableHead>
             <TableHead>Code</TableHead>
             <TableHead>Status</TableHead>
+            <TableHead>Links</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -81,11 +84,32 @@ export const AffiliatesTable = ({ affiliates, onUpdate }: AffiliatesTableProps) 
                 </Badge>
               </TableCell>
               <TableCell>
+                <div className="flex gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => window.open(`/${affiliate.slug}/event`, '_blank')}
+                    title="View event page"
+                  >
+                    <CalendarCheck className="w-4 h-4 text-primary" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => copyLink(affiliate.slug, true)}
+                    title="Copy event page link"
+                  >
+                    <Copy className="w-4 h-4 text-primary" />
+                  </Button>
+                </div>
+              </TableCell>
+              <TableCell>
                 <div className="flex gap-2 justify-end">
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => window.open(`/${affiliate.slug}`, '_blank')}
+                    title="View landing page"
                   >
                     <ExternalLink className="w-4 h-4" />
                   </Button>
@@ -93,6 +117,7 @@ export const AffiliatesTable = ({ affiliates, onUpdate }: AffiliatesTableProps) 
                     variant="ghost"
                     size="sm"
                     onClick={() => copyLink(affiliate.slug)}
+                    title="Copy landing page link"
                   >
                     <Copy className="w-4 h-4" />
                   </Button>

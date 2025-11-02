@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { KPICard } from "@/components/KPICard";
 import { CreateAffiliateDialog } from "@/components/CreateAffiliateDialog";
 import { AffiliatesTable } from "@/components/AffiliatesTable";
-import { Users, MousePointerClick, UserCheck, DollarSign, LogOut } from "lucide-react";
+import { Users, MousePointerClick, UserCheck, DollarSign, LogOut, CalendarCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -169,7 +169,20 @@ export default function Admin() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <button
+            onClick={() => navigate("/event")}
+            className="glass-panel border border-primary/30 rounded-2xl p-6 text-left hover-lift hover:border-primary transition-all bg-primary/5"
+          >
+            <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
+              <CalendarCheck className="w-5 h-5 text-primary" />
+              Edit Event Page
+            </h3>
+            <p className="text-muted-foreground">
+              Update the master event template that all affiliates share
+            </p>
+          </button>
+          
           <button
             onClick={() => navigate("/admin/leads")}
             className="glass-panel border border-border rounded-2xl p-6 text-left hover-lift hover:border-primary/50 transition-all"
