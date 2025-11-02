@@ -536,7 +536,7 @@ const Event = () => {
             }}>
               <CarouselContent className="-ml-2 md:-ml-4">
                 {/* Justice Anderson - Featured Speaker */}
-                <CarouselItem className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                <CarouselItem className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} 
                     whileInView={{ opacity: 1, y: 0 }} 
@@ -545,14 +545,16 @@ const Event = () => {
                   >
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Card className="rounded-3xl bg-gradient-to-br from-fuchsia-600/5 via-violet-600/5 to-indigo-600/5 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-fuchsia-600/20 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:scale-105 h-full">
-                          <CardContent className="p-4 sm:p-6 text-center h-full flex flex-col items-center justify-center">
-                            <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-fuchsia-600 to-violet-600 rounded-2xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg overflow-hidden">
+                        <Card className="rounded-3xl bg-gradient-to-br from-fuchsia-600/5 via-violet-600/5 to-indigo-600/5 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-fuchsia-600/20 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:scale-105 h-full overflow-hidden">
+                          <CardContent className="p-0 text-center h-full flex flex-col">
+                            <div className="w-full aspect-[3/4] bg-gradient-to-br from-fuchsia-600 to-violet-600 flex items-center justify-center shadow-lg overflow-hidden">
                               <img src="/lovable-uploads/justice-anderson.png" alt="Justice Anderson" className="w-full h-full object-cover object-center" />
                             </div>
-                            <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Justice Anderson</h3>
-                            <p className="text-xs sm:text-sm text-fuchsia-400 font-medium mb-2">Founder of the Strategic Partner Network</p>
-                            <Button variant="link" className="text-xs text-muted-foreground p-0 h-auto">Learn More →</Button>
+                            <div className="p-6">
+                              <h3 className="text-xl font-semibold mb-2">Justice Anderson</h3>
+                              <p className="text-sm text-fuchsia-400 font-medium mb-3">Founder of the Strategic Partner Network</p>
+                              <Button variant="link" className="text-xs text-muted-foreground p-0 h-auto">Learn More →</Button>
+                            </div>
                           </CardContent>
                         </Card>
                       </DialogTrigger>
@@ -576,7 +578,7 @@ const Event = () => {
                 </CarouselItem>
 
                 {/* John Thornton - Featured Speaker */}
-                <CarouselItem className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                <CarouselItem className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} 
                     whileInView={{ opacity: 1, y: 0 }} 
@@ -585,14 +587,16 @@ const Event = () => {
                   >
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Card className="rounded-3xl bg-gradient-to-br from-fuchsia-600/5 via-violet-600/5 to-indigo-600/5 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-violet-600/20 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:scale-105 h-full">
-                          <CardContent className="p-4 sm:p-6 text-center h-full flex flex-col items-center justify-center">
-                            <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-slate-200 to-slate-300 rounded-2xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg overflow-hidden">
+                        <Card className="rounded-3xl bg-gradient-to-br from-fuchsia-600/5 via-violet-600/5 to-indigo-600/5 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-violet-600/20 shadow-xl hover:shadow-2xl transition-all cursor-pointer hover:scale-105 h-full overflow-hidden">
+                          <CardContent className="p-0 text-center h-full flex flex-col">
+                            <div className="w-full aspect-[3/4] bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center shadow-lg overflow-hidden">
                               <img src="/lovable-uploads/speaker-professional.png" alt="Featured Speaker" className="w-full h-full object-cover object-center" />
                             </div>
-                            <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">John Thornton</h3>
-                            <p className="text-xs sm:text-sm text-violet-400 font-medium mb-2">Business Developer of BookkeeperSA</p>
-                            <Button variant="link" className="text-xs text-muted-foreground p-0 h-auto">Learn More →</Button>
+                            <div className="p-6">
+                              <h3 className="text-xl font-semibold mb-2">John Thornton</h3>
+                              <p className="text-sm text-violet-400 font-medium mb-3">Business Developer of BookkeeperSA</p>
+                              <Button variant="link" className="text-xs text-muted-foreground p-0 h-auto">Learn More →</Button>
+                            </div>
                           </CardContent>
                         </Card>
                       </DialogTrigger>
@@ -616,22 +620,24 @@ const Event = () => {
 
                 {/* TBD Speakers - Placeholder Cards */}
                 {[1, 2, 3, 4].map(index => (
-                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                  <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                     <motion.div 
                       initial={{ opacity: 0, y: 20 }} 
                       whileInView={{ opacity: 1, y: 0 }} 
                       transition={{ duration: 0.5, delay: (index + 1) * 0.1 }}
                     >
-                      <Card className="h-full rounded-3xl bg-gradient-to-br from-slate-800/50 via-slate-700/50 to-slate-600/50 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-slate-600/30 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                        <CardContent className="p-6 text-center h-full flex flex-col items-center">
-                          <div className="w-32 h-32 bg-gradient-to-br from-slate-600 to-slate-700 rounded-2xl flex items-center justify-center mb-4 shadow-lg overflow-hidden">
-                            <span className="text-3xl font-bold text-slate-300">?</span>
+                      <Card className="h-full rounded-3xl bg-gradient-to-br from-slate-800/50 via-slate-700/50 to-slate-600/50 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md border border-slate-600/30 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                        <CardContent className="p-0 text-center h-full flex flex-col">
+                          <div className="w-full aspect-[3/4] bg-gradient-to-br from-slate-600 to-slate-700 flex items-center justify-center shadow-lg overflow-hidden">
+                            <span className="text-6xl font-bold text-slate-300">?</span>
                           </div>
-                          <h3 className="text-xl font-semibold mb-2 text-slate-300">Speaker {index + 1}</h3>
-                          <p className="text-sm text-slate-400 mb-3 font-medium">TBD</p>
-                          <p className="text-sm text-slate-500 flex-grow">
-                            More speakers to be announced soon. Stay tuned for exciting updates on industry experts joining our lineup.
-                          </p>
+                          <div className="p-6 flex flex-col flex-grow">
+                            <h3 className="text-xl font-semibold mb-2 text-slate-300">Speaker {index + 1}</h3>
+                            <p className="text-sm text-slate-400 mb-3 font-medium">TBD</p>
+                            <p className="text-sm text-slate-500 flex-grow">
+                              More speakers to be announced soon. Stay tuned for exciting updates on industry experts joining our lineup.
+                            </p>
+                          </div>
                         </CardContent>
                       </Card>
                     </motion.div>
