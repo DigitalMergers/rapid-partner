@@ -325,48 +325,6 @@ const Event = () => {
                 </p>
               </CardContent>
             </Card>
-
-            <Card className="border-2 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <Award className="w-8 h-8 text-primary" />
-                </div>
-                <CardTitle className="text-xl">Exclusive Access</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Limited attendance ensures quality interactions and meaningful conversations with each attendee.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <Users className="w-8 h-8 text-primary" />
-                </div>
-                <CardTitle className="text-xl">Intimate Setting</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Face-to-face networking in a relaxed atmosphere designed for building authentic business relationships.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <MapPin className="w-8 h-8 text-primary" />
-                </div>
-                <CardTitle className="text-xl">Prime Location</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Centrally located in San Antonio's thriving business district, easily accessible for all attendees.
-                </p>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
