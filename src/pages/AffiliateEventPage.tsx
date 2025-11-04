@@ -80,7 +80,7 @@ const AffiliateEventPage = () => {
 
       if (error) throw error;
 
-      toast.success("Registration successful! We'll be in touch soon.");
+      toast.success("Thank you for registering for this event. We look forward to seeing you there!");
     } catch (error: any) {
       console.error("Error:", error);
       toast.error("Failed to submit registration");
