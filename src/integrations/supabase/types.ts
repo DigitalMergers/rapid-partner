@@ -248,6 +248,50 @@ export type Database = {
           },
         ]
       }
+      tracking_links: {
+        Row: {
+          affiliate_id: string
+          created_at: string
+          destination_url: string
+          id: string
+          label: string | null
+          short_code: string
+          utm_campaign: string | null
+          utm_medium: string
+          utm_source: string
+        }
+        Insert: {
+          affiliate_id: string
+          created_at?: string
+          destination_url: string
+          id?: string
+          label?: string | null
+          short_code: string
+          utm_campaign?: string | null
+          utm_medium?: string
+          utm_source?: string
+        }
+        Update: {
+          affiliate_id?: string
+          created_at?: string
+          destination_url?: string
+          id?: string
+          label?: string | null
+          short_code?: string
+          utm_campaign?: string | null
+          utm_medium?: string
+          utm_source?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tracking_links_affiliate_id_fkey"
+            columns: ["affiliate_id"]
+            isOneToOne: false
+            referencedRelation: "affiliates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string

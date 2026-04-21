@@ -12,6 +12,8 @@ import EventPageBuilder from "./pages/EventPageBuilder";
 import AffiliateEventPage from "./pages/AffiliateEventPage";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
+import TrackingLinks from "./pages/TrackingLinks";
+import TrackRedirect from "./pages/TrackRedirect";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,8 @@ const App = () => (
             <Route path="/admin/leads" element={<Leads />} />
             <Route path="/event" element={<EventPageBuilder />} />
             <Route path="/:slug/event" element={<AffiliateEventPage />} />
+            <Route path="/admin/links" element={<TrackingLinks />} />
+            <Route path="/r/:shortCode" element={<TrackRedirect />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="/:slug" element={<AffiliateLanding />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

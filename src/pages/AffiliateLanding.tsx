@@ -156,7 +156,7 @@ export default function AffiliateLanding() {
       });
     } catch (error: any) {
       toast.error("Something went sideways. Try again.");
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.error(error);
       }
     } finally {

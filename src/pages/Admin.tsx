@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { KPICard } from "@/components/KPICard";
 import { CreateAffiliateDialog } from "@/components/CreateAffiliateDialog";
 import { AffiliatesTable } from "@/components/AffiliatesTable";
-import { Users, MousePointerClick, UserCheck, DollarSign, LogOut, CalendarCheck } from "lucide-react";
+import { Users, MousePointerClick, UserCheck, DollarSign, LogOut, CalendarCheck, Link2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -195,13 +195,19 @@ export default function Admin() {
               See detailed information about all leads submitted from affiliate pages
             </p>
           </button>
-          
-          <div className="glass-panel border border-border rounded-2xl p-6">
-            <h3 className="text-xl font-bold mb-2">Performance Analytics</h3>
+
+          <button
+            onClick={() => navigate("/admin/links")}
+            className="glass-panel border border-border rounded-2xl p-6 text-left hover-lift hover:border-primary/50 transition-all"
+          >
+            <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
+              <Link2 className="w-5 h-5 text-primary" />
+              Tracking Links
+            </h3>
             <p className="text-muted-foreground">
-              Track conversion rates and affiliate performance metrics
+              Generate trackable UTM short links to any destination URL
             </p>
-          </div>
+          </button>
         </div>
 
         {/* Affiliates Table */}

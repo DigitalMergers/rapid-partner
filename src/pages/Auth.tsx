@@ -102,7 +102,7 @@ export default function Auth() {
       }
     } catch (error: any) {
       toast.error("Something went wrong. Please try again.");
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.error(error);
       }
     } finally {
