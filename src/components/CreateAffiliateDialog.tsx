@@ -101,7 +101,7 @@ export const CreateAffiliateDialog = ({ open, onOpenChange, onSuccess }: CreateA
       onOpenChange(false);
       onSuccess();
     } catch (error: any) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.error("Error creating affiliate:", error);
       }
       toast.error(error.message || "Failed to create affiliate");
