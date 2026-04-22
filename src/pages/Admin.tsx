@@ -8,10 +8,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 
 export default function Admin() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
+  const { isAdmin, loading: roleLoading } = useIsAdmin();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [affiliates, setAffiliates] = useState<any[]>([]);
   const [stats, setStats] = useState({
@@ -25,8 +27,13 @@ export default function Admin() {
   useEffect(() => {
     if (!loading && !user) {
       navigate("/auth");
+      return;
     }
-  }, [user, loading, navigate]);
+    if (!loading && !roleLoading && user && !isAdmin) {
+      toast.error("Admin access required");
+      navigate("/auth");
+    }
+  }, [user, loading, isAdmin, roleLoading, navigate]);
 
   const fetchData = async () => {
     // Fetch affiliates
@@ -78,12 +85,12 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    if (user) {
+    if (user && isAdmin) {
       fetchData();
     }
-  }, [user]);
+  }, [user, isAdmin]);
 
-  if (loading) {
+  if (loading || roleLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <p className="text-muted-foreground">Loading...</p>
@@ -91,7 +98,7 @@ export default function Admin() {
     );
   }
 
-  if (!user) {
+  if (!user || !isAdmin) {
     return null;
   }
 

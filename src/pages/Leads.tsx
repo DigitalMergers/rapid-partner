@@ -7,6 +7,7 @@ import { ArrowLeft, Mail, Phone, Globe, Building2, CheckCircle2 } from "lucide-r
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 
 interface Lead {
   id: string;
@@ -30,6 +31,7 @@ interface Lead {
 export default function Leads() {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
+  const { isAdmin, loading: roleLoading } = useIsAdmin();
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,14 +39,19 @@ export default function Leads() {
   useEffect(() => {
     if (!authLoading && !user) {
       navigate("/auth");
+      return;
     }
-  }, [user, authLoading, navigate]);
+    if (!authLoading && !roleLoading && user && !isAdmin) {
+      toast.error("Admin access required");
+      navigate("/auth");
+    }
+  }, [user, authLoading, isAdmin, roleLoading, navigate]);
 
   useEffect(() => {
-    if (user) {
+    if (user && isAdmin) {
       fetchLeads();
     }
-  }, [user]);
+  }, [user, isAdmin]);
 
   const fetchLeads = async () => {
     setLoading(true);
@@ -104,7 +111,7 @@ export default function Leads() {
     }
   };
 
-  if (authLoading || loading) {
+  if (authLoading || roleLoading || loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <p className="text-muted-foreground">Loading...</p>
@@ -112,7 +119,7 @@ export default function Leads() {
     );
   }
 
-  if (!user) {
+  if (!user || !isAdmin) {
     return null;
   }
 
