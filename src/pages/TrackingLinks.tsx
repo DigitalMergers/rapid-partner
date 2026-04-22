@@ -22,6 +22,7 @@ import { ArrowLeft, Copy, Trash2, Link2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 
 type Affiliate = {
   id: string;
@@ -55,6 +56,7 @@ function generateShortCode(len = 6) {
 export default function TrackingLinks() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
+  const { isAdmin, loading: roleLoading } = useIsAdmin();
 
   const [affiliates, setAffiliates] = useState<Affiliate[]>([]);
   const [links, setLinks] = useState<TrackingLink[]>([]);
@@ -69,8 +71,15 @@ export default function TrackingLinks() {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (!loading && !user) navigate("/auth");
-  }, [user, loading, navigate]);
+    if (!loading && !user) {
+      navigate("/auth");
+      return;
+    }
+    if (!loading && !roleLoading && user && !isAdmin) {
+      toast.error("Admin access required");
+      navigate("/auth");
+    }
+  }, [user, loading, isAdmin, roleLoading, navigate]);
 
   const fetchData = async () => {
     const [{ data: affs }, { data: tls }, { data: clickRows }] = await Promise.all([
@@ -97,8 +106,8 @@ export default function TrackingLinks() {
   };
 
   useEffect(() => {
-    if (user) fetchData();
-  }, [user]);
+    if (user && isAdmin) fetchData();
+  }, [user, isAdmin]);
 
   const baseUrl = window.location.origin;
 
@@ -182,14 +191,14 @@ export default function TrackingLinks() {
     fetchData();
   };
 
-  if (loading) {
+  if (loading || roleLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <p className="text-muted-foreground">Loading...</p>
       </div>
     );
   }
-  if (!user) return null;
+  if (!user || !isAdmin) return null;
 
   return (
     <div className="min-h-screen bg-background">

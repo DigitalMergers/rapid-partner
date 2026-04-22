@@ -318,6 +318,28 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_public_affiliate_by_slug: {
+        Args: { _slug: string }
+        Returns: {
+          code: string
+          first_name: string
+          id: string
+          last_name: string
+          slug: string
+        }[]
+      }
+      get_tracking_link_for_redirect: {
+        Args: { _short_code: string }
+        Returns: {
+          affiliate_code: string
+          affiliate_id: string
+          affiliate_slug: string
+          destination_url: string
+          utm_campaign: string
+          utm_medium: string
+          utm_source: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
