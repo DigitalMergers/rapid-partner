@@ -52,12 +52,11 @@ export default function AffiliateLanding() {
       }, 10000);
 
       try {
-        const { data, error: fetchError } = await supabase
-          .from("affiliates")
-          .select("id, slug, first_name, last_name, code")
-          .eq("slug", slug)
-          .eq("status", "active")
-          .maybeSingle();
+        const { data: rows, error: fetchError } = await supabase.rpc(
+          "get_public_affiliate_by_slug",
+          { _slug: slug },
+        );
+        const data = Array.isArray(rows) ? rows[0] : null;
 
         clearTimeout(timeoutId);
 

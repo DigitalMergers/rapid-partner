@@ -13,21 +13,20 @@ export default function TrackRedirect() {
         return;
       }
 
-      // Lookup link + affiliate
-      const { data: link, error } = await supabase
-        .from("tracking_links")
-        .select("id, short_code, destination_url, utm_source, utm_medium, utm_campaign, affiliate_id, affiliates(slug, code)")
-        .eq("short_code", shortCode)
-        .maybeSingle();
+      // Lookup via SECURITY DEFINER RPC (no broad public table access)
+      const { data: rows, error } = await supabase.rpc(
+        "get_tracking_link_for_redirect",
+        { _short_code: shortCode },
+      );
 
+      const link = Array.isArray(rows) ? rows[0] : null;
       if (error || !link) {
         navigate("/404", { replace: true });
         return;
       }
 
-      const affiliate = (link as any).affiliates;
-      const slug = affiliate?.slug ?? "";
-      const code = affiliate?.code ?? "";
+      const slug = link.affiliate_slug ?? "";
+      const code = link.affiliate_code ?? "";
       const campaign = link.utm_campaign || slug || "affiliate";
 
       // Build click_id we can also pass through
