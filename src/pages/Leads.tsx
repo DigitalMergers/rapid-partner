@@ -222,14 +222,18 @@ export default function Leads() {
                           {lead.website && (
                             <div className="flex items-center gap-2 text-muted-foreground">
                               <Globe className="w-3 h-3" />
-                              <a 
-                                href={lead.website} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="hover:text-primary underline"
-                              >
-                                {lead.website.replace(/^https?:\/\//, '').substring(0, 30)}
-                              </a>
+                              {/^https?:\/\//i.test(lead.website) ? (
+                                <a
+                                  href={lead.website}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="hover:text-primary underline"
+                                >
+                                  {lead.website.replace(/^https?:\/\//, '').substring(0, 30)}
+                                </a>
+                              ) : (
+                                <span>{lead.website.substring(0, 30)}</span>
+                              )}
                             </div>
                           )}
                         </div>
